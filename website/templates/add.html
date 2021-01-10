@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<center>
+
+{%if my_answer %}
+<div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+  {{ my_answer }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+	
+<h1><img src="static/images/{{ num_1 }}.png"> + <img src="static/images/{{ num_2 }}.png"></h1>
+<br/>
+
+<br/>
+<br/>
+<form action="{% url 'add' %}" method="POST">
+	{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Typ hier jou antwoord." name="answer">
+    <input type="hidden" name="old_num_1" value="{{ num_1 }}">
+    <input type="hidden" name="old_num_2" value="{{ num_2 }}">
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">Submit</button>
+</form>
+</center>
+{% endblock%}
