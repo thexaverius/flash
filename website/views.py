@@ -11,7 +11,20 @@ def add(request):
 	num_2 = randint(0,10)
 
 	if request.method == "POST":
-		answer = int(request.POST['answer'])
+		try:
+			answer = int(request.POST['answer'])
+		except:
+			answer = 0
+			my_answer = "Het antwoord is geen goed getal gebruik alleen 0,1,2,3,4,5,6,7,8,9 op het toetsenbord."
+			color = "danger"
+			return render(request, 'add.html', {
+				'answer': answer,
+				'my_answer': my_answer,
+				'num_1' : num_1,
+				'num_2' : num_2,
+				'color' : color,
+				})
+
 		old_num_1 = request.POST['old_num_1']
 		old_num_2 = request.POST['old_num_2']
 
