@@ -2,6 +2,29 @@
 
 {% block content%}
 <center>
-<h1>Keer sommen</h1>
+
+{%if my_answer %}
+<div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+  {{ my_answer }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+	
+<h1><img src="static/images/n{{ num_1 }}.png"> x <img src="static/images/n{{ num_2 }}.png"></h1>
+<br/>
+
+<br/>
+<br/>
+<form action="{% url 'multiply' %}" method="POST">
+	{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Typ hier jou antwoord." name="answer">
+    <input type="hidden" name="old_num_1" value="{{ num_1 }}">
+    <input type="hidden" name="old_num_2" value="{{ num_2 }}">
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">Geef je antwoord</button>
+</form>
 </center>
 {% endblock%}

@@ -51,10 +51,96 @@ def add(request):
 			})
 
 def substract(request):
-	return render(request,'substract.html',{})
+	from random import randint
+
+	num_1 = randint(0,10)
+	num_2 = randint(0,10)
+
+	if request.method == "POST":
+		try:
+			answer = int(request.POST['answer'])
+		except:
+			answer = 0
+			my_answer = "Het antwoord is geen goed getal gebruik alleen 0,1,2,3,4,5,6,7,8,9 op het toetsenbord."
+			color = "danger"
+			return render(request, 'substract.html', {
+				'answer': answer,
+				'my_answer': my_answer,
+				'num_1' : num_1,
+				'num_2' : num_2,
+				'color' : color,
+				})
+
+		old_num_1 = request.POST['old_num_1']
+		old_num_2 = request.POST['old_num_2']
+
+		correct_answer = int(old_num_1) - int(old_num_2)
+
+		if answer == correct_answer:
+			my_answer = "Goed zo! "+ old_num_1 + " - " + old_num_2 + " = " + str(answer) 
+			color = "success"
+		else:
+			my_answer = "Jammer, niet goed. "+ old_num_1 + " - " + old_num_2 + " is niet " + str(answer) + " het goede antwoord is: " +  str(correct_answer)
+			color = "danger"
+
+		return render(request, 'substract.html', {
+			'answer': answer,
+			'my_answer': my_answer,
+			'num_1' : num_1,
+			'num_2' : num_2,
+			'color' : color,
+			})
+	else:
+		return render(request,'substract.html',{
+			'num_1' : num_1,
+			'num_2' : num_2,
+			})
 
 def multiply(request):
-	return render(request,'multiply.html',{})
+	from random import randint
+
+	num_1 = randint(0,10)
+	num_2 = randint(0,10)
+
+	if request.method == "POST":
+		try:
+			answer = int(request.POST['answer'])
+		except:
+			answer = 0
+			my_answer = "Het antwoord is geen goed getal gebruik alleen 0,1,2,3,4,5,6,7,8,9 op het toetsenbord."
+			color = "danger"
+			return render(request, 'multiply.html', {
+				'answer': answer,
+				'my_answer': my_answer,
+				'num_1' : num_1,
+				'num_2' : num_2,
+				'color' : color,
+				})
+
+		old_num_1 = request.POST['old_num_1']
+		old_num_2 = request.POST['old_num_2']
+
+		correct_answer = int(old_num_1) * int(old_num_2)
+
+		if answer == correct_answer:
+			my_answer = "Goed zo! "+ old_num_1 + " x " + old_num_2 + " = " + str(answer) 
+			color = "success"
+		else:
+			my_answer = "Jammer, niet goed. "+ old_num_1 + " x " + old_num_2 + " is niet " + str(answer) + " het goede antwoord is: " +  str(correct_answer)
+			color = "danger"
+
+		return render(request, 'multiply.html', {
+			'answer': answer,
+			'my_answer': my_answer,
+			'num_1' : num_1,
+			'num_2' : num_2,
+			'color' : color,
+			})
+	else:
+		return render(request,'multiply.html',{
+			'num_1' : num_1,
+			'num_2' : num_2,
+			})
 
 def divide(request):
 	return render(request,'divide.html',{})
